@@ -6,10 +6,10 @@ import connectCloudinary from './config/cloudinary.js';
 import companyRoutes from './routes/companyRoutes.js';
 import jobRoutes from './routes/jobRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import savedJobRoutes from "./routes/savedJobRoutes.js";
 import { clerkMiddleware } from '@clerk/express';
 import * as Sentry from '@sentry/node';
 import 'dotenv/config';
-import savedJobRoutes from "./routes/savedJobRoutes.js";
 
 const app = express();
 
@@ -18,18 +18,19 @@ await connectDB();
 await connectCloudinary();
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({ origin: process.env.CLIENT_URL || '*', credentials: true }));
 app.use(express.json());
-app.use(clerkMiddleware()); // ✅ sets req.auth
+app.use(clerkMiddleware());
 
 // Routes
-app.get('/', (req, res) => res.send('✅ API working'));
+app.get('/api', (req, res) => res.send('✅ API working'));
 app.use('/api/company', companyRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/users', userRoutes);
-app.use("/api/users", savedJobRoutes); 
+app.use("/api/users", savedJobRoutes);
 
-// Start server
-const PORT = process.env.PORT || 5000;
+// Sentry error handler
 Sentry.setupExpressErrorHandler(app);
-app.listen(PORT, () => console.log(`🚀 Server running on ${PORT}`));
+
+//  Remove app.listen() for Vercel
+export default app;
