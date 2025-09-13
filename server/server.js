@@ -7,12 +7,12 @@ import jobRoutes from './routes/jobRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import savedJobRoutes from "./routes/savedJobRoutes.js";
 import { clerkMiddleware } from '@clerk/express';
-import 'dotenv/config';
 import * as Sentry from '@sentry/node';
+import 'dotenv/config';
 
 const app = express();
 
-// DB + Cloudinary
+// Connect DB + Cloudinary
 await connectDB();
 await connectCloudinary();
 
@@ -21,7 +21,7 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use(clerkMiddleware());
 
-// Optional: prevent caching
+// Optional: disable caching for APIs
 app.use((req, res, next) => {
   res.set("Cache-Control", "no-store");
   next();
