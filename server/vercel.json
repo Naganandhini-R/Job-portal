@@ -13,8 +13,8 @@
     },
     {
       "src": "/(.*)",
-      "dest": "dist/$1"
+      "dest": "client/dist/$1"
     }
   ],
-  "installCommand": "cd client && npm install"
+  "outputDirectory": "client/dist"
 }
