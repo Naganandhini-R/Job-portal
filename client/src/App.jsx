@@ -14,6 +14,7 @@ import 'quill/dist/quill.snow.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SavedJobs from "./pages/SavedJobs"; 
+import api from "./api"; 
 
 const App = () => {
   const { showRecruiterLogin, companyToken } = useContext(AppContext);
