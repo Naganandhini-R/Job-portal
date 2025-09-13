@@ -22,7 +22,9 @@ export const AppContextProvider = (props) => {
   // Function to fetch jobs
   const fetchJobs = async () => {
     try {
-      const { data } = await axios.get(`${backendUrl}/api/jobs`);
+      const { data } = await axios.get(`${backendUrl}/api/jobs`, {
+         headers: { "Cache-Control": "no-cache" } // add this line
+         });
       if (data.success) {
         setJobs(data.jobs);
         console.log(data.jobs);
