@@ -27,7 +27,7 @@ app.get('/api', (req, res) => res.send('✅ API working'));
 app.use('/api/company', companyRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/users', userRoutes);
-app.use("/api/users", savedJobRoutes);
+app.use("/api/saved-jobs", savedJobRoutes);
 
 // Sentry error handler
 Sentry.setupExpressErrorHandler(app);
