@@ -5,4 +5,12 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
+// 🪄 Interceptor to remove duplicate `/api`
+api.interceptors.request.use((config) => {
+  if (config.url.startsWith("/api/")) {
+    config.url = config.url.replace("/api/", "/"); // /api/jobs -> /jobs
+  }
+  return config;
+});
+
 export default api;
