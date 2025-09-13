@@ -24,6 +24,10 @@ app.use(clerkMiddleware());
 
 // Routes
 app.get('/api', (req, res) => res.send('✅ API working'));
+app.use("/api/api", (req, res, next) => {
+  req.url = req.url.replace(/^\/api/, "");
+  next();
+});
 app.use('/api/company', companyRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/users', userRoutes);
