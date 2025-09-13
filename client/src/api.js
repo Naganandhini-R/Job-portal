@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL, // https://job-portal.vercel.app
+  baseURL: import.meta.env.VITE_BACKEND_URL, // deployed Vercel URL
   headers: { "Content-Type": "application/json" },
-  withCredentials: true, // needed for cookies if used
+  withCredentials: true, // needed if using cookies/session
 });
 
 export default api;
