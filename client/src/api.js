@@ -1,12 +1,12 @@
-// src/api.js
+// client/src/api.js
 import axios from "axios";
 
-// ✅ Fixed: Use MODE check instead of VITE_API_URL to avoid undefined
-const base = import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000';
-
-// 👉 Don't add "/api" here, because you already include "/api" in calls
+// ✅ Final fix - no more undefined/api errors
 const api = axios.create({
-  baseURL: base,
+  baseURL: import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 export default api;
